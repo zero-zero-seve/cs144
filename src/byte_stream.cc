@@ -4,7 +4,7 @@ using namespace std;
 
 ByteStream::ByteStream(uint64_t capacity) : capacity_(capacity), buffer(capacity, '\0') { buffer.clear(); }
 bool Writer::is_closed() const { return this->closed; }
-void Writer::push(string data) {
+uint64_t Writer::push(string data) {
     string temp = data;
     if (available_capacity() == 0) {
         return;
@@ -15,7 +15,7 @@ void Writer::push(string data) {
     }
     buffer = buffer + temp;
     count_w += temp.size();
-    return;
+    return temp.size();
 }
 
 void Writer::close() {
