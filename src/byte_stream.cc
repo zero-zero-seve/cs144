@@ -7,7 +7,7 @@ bool Writer::is_closed() const { return this->closed; }
 uint64_t Writer::push(string data) {
     string temp = data;
     if (available_capacity() == 0) {
-        return;
+        return 0;
     }
     if (data.size() > this->available_capacity()) {
         // ¼õÉÙdata

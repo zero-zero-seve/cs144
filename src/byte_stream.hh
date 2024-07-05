@@ -54,4 +54,3 @@ class Reader : public ByteStream {
  * from a ByteStream Reader into a string;
  */
 void read(Reader& reader, uint64_t len, std::string& out);
-

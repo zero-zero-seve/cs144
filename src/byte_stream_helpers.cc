@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstdint>
 #include <stdexcept>
 
@@ -9,15 +10,15 @@
  */
 void read(Reader& reader, uint64_t len, std::string& out) {
     out.clear();
-
+    uint64_t temp = 0;
     while (reader.bytes_buffered() and out.size() < len) {
         auto view = reader.peek();
 
         if (view.empty()) {
             throw std::runtime_error("Reader::peek() returned empty string_view");
         }
-
-        view = view.substr(0, len - out.size());  // Don't return more bytes than desired.
+        temp = std::min(view.size(), len - out.size());
+        view = view.substr(0, temp);  // Don't return more bytes than desired.
         out += view;
         reader.pop(view.size());
     }
