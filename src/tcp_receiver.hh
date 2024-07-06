@@ -3,7 +3,7 @@
 #include "reassembler.hh"
 #include "tcp_receiver_message.hh"
 #include "tcp_sender_message.hh"
-
+#include "wrapping_integers.hh"
 class TCPReceiver {
    public:
     // Construct with given Reassembler
@@ -26,4 +26,7 @@ class TCPReceiver {
 
    private:
     Reassembler reassembler_;
+    Wrap32 ISN{};
+    bool error_{false};
+    bool isGetISN{false};
 };
